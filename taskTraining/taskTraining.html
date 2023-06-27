@@ -1,0 +1,191 @@
+<template>
+    <h1 class="slds-text-heading_medium slds-m-bottom_xx-small">Project
+        Management</h1>
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+            aria-modal="true" aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01"
+                        class="slds-text-heading_medium slds-hyphenate">Project
+                        Edit</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium"
+                    id="modal-content-id-1">
+                    <table
+                        class="slds-table slds-table_bordered">
+                        <thead class="slds-table_col-bordered">
+                            <tr class="border-box">
+                                <td class="backgrounds-color-item border-box">
+                                    <div title="Name">Name<abbr class="slds-required" title="required">*</abbr></div>
+                                </td>
+                                <td>
+                                    <lightning-input type="text" value={a_Project_Name_Edit} data-id="a_Project_Name_Edit"></lightning-input>
+                                </td>
+                            </tr>
+                            <tr class="border-box">
+                                <td class="backgrounds-color-item border-box">
+                                    <div title="StartDate">Start
+                                        Date</div>
+                                </td>
+                                <td>
+                                    <lightning-input type="date" value={a_Start_Date_Edit} data-id="a_Start_Date_Edit"></lightning-input>
+                                </td>
+                            </tr>
+                            <tr class="border-box">
+                                <td class="backgrounds-color-item border-box">
+                                    <div title="EndDate">End Date</div>
+                                </td>
+                                <td>
+                                    <lightning-input type="date" value={a_End_Date_Edit} data-id="a_End_Date_Edit"></lightning-input>
+                                </td>
+                            </tr>
+                            <tr class="border-box">
+                                <td class="backgrounds-color-item border-box">
+                                    <div title="Description">Description</div>
+                                </td>
+                                <td>
+                                    <lightning-input type="text" value={a_Description_Edit} data-id="a_Description_Edit"></lightning-input>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="slds-modal__footer slds-modal__footer_directional">
+                        <button class="slds-button slds-button_brand" onclick={submitDetails}>Save</button>
+                        <button class="slds-button slds-button_neutral" onclick={closeModal}>Cancel</button>
+                      </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <div class="slds-var-m-horizontal_xx-large">
+        <div class="slds-m-horizontal_xx-large slds-m-bottom_small">
+            <h6>Create Project</h6>
+            <table
+                class="slds-table slds-table_bordered">
+                <tbody>
+                    <tr>
+                        <td class="backgrounds-color-item border-box"
+                            id="enterName">
+                            Name
+                        </td>
+                        <td class="border-box" colspan="3">
+                            <lightning-input type="text"
+                                value={a_Project_Name_Ref}
+                                onchange={handle_Project_Name_Change}>
+                            </lightning-input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="backgrounds-color-item border-box">
+                            Start Date
+                        </td>
+                        <td class="slds-text-align_right border-box">
+                            <div>
+                                <lightning-input type="date"
+                                    value={a_Start_Date_Ref}
+                                    onchange={handle_Start_Date_Change}>
+                                </lightning-input>
+                            </div>
+
+                        </td>
+                        <td
+                            class="backgrounds-color-item border-box">
+                            End Date
+                        </td>
+                        <td class="slds-text-align_right border-box">
+                            <div>
+                                <lightning-input type="date"
+                                    value={a_End_Date_Ref}
+                                    onchange={handle_End_Date_Change}>
+                                </lightning-input>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="slds-col">
+                        <td class="backgrounds-color-item border-box">
+                            Description
+                        </td>
+                        <td colspan="3">
+                            <lightning-input type="text"
+                                value={a_Description_Ref}
+                                onchange={handle_Description_Change}>
+                            </lightning-input>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="slds-text-align_center">
+            <div>
+                <button
+                    class="slds-button slds-button_brand" onclick={handle_Reset}>Reset</button>
+                <lightning-button label="Create"
+                    onclick={handle_Submit}>
+                </lightning-button>
+            </div>
+        </div>
+        <div class="slds-m-horizontal_xx-large slds-m-bottom_small">
+            <h6>Project List</h6>
+            <table
+                class="slds-table slds-table_bordered">
+                <thead class="slds-table_col-bordered">
+                    <tr>
+                        <td class="backgrounds-color-item border-box">
+                            <div title="No">No</div>
+                        </td>
+                        <td class="backgrounds-color-item border-box">
+                            <div title="Name">Name</div>
+                        </td>
+                        <td class="backgrounds-color-item border-box">
+                            <div title="StartDate">Start
+                                Date</div>
+                        </td>
+                        <td class="backgrounds-color-item border-box">
+                            <div title="EndDate">End Date</div>
+                        </td>
+                        <td class="backgrounds-color-item border-box">
+                            <div title="Description">Description</div>
+                        </td>
+                        <td class="backgrounds-color-item border-box">
+                            <div title="Action">Action</div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={dataColumns} for:item="data"
+                        for:index="index">
+                        <tr key={data.Id}>
+                            <td class="slds-text-align_center border-bottom">
+                                <div>{index}</div>
+                            </td>
+                            <td class="border-bottom">
+                                <div>{data.Name}</div>
+                            </td>
+                            <td class="slds-text-align_right border-bottom">
+                                <div>{data.start_date__c}</div>
+                            </td>
+                            <td class="slds-text-align_right border-bottom">
+                                <div>{data.end_date__c}</div>
+                            </td>
+                            <td class="border-bottom">
+                                <div>{data.description__c}</div>
+                            </td>
+                            <td class="slds-text-align_center border-bottom">
+                                <div>
+                                    <button
+                                        class="slds-button slds-button_brand"
+                                        onclick={openModal} id={data.Id}>Edit</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
