@@ -1,0 +1,80 @@
+<template>
+    <div class="slds-m-horizontal_xx-large slds-m-bottom_small">
+        <h6>Create Project</h6>
+        <table
+            class="slds-table slds-table_bordered">
+            <tbody>
+                <tr>
+                    <td class="backgrounds-color-item border-box"
+                        id="enterName">
+                        Name<abbr
+                            class="slds-required"
+                            title="required">*</abbr>
+                    </td>
+                    <td class="border-box" colspan="3">
+                        <lightning-input variant="label-hidden" type="text"
+                            data-id="Name" max-length=255
+                            onchange={handleOnChange} required>
+                        </lightning-input>
+                        <template if:true={isShowErrorField}>
+                            <p class="showError">A required item has not been
+                                entered</p>
+                        </template>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="backgrounds-color-item border-box">
+                        Start Date
+                    </td>
+                    <td class="slds-text-align_right border-box">
+                        <div>
+                            <lightning-input variant="label-hidden"
+                                type="date"
+                                data-id="start_date__c"
+                                onchange={handleOnChangeStartDate}>
+                            </lightning-input>
+                            <template if:true={isShowErrorFieldStartDate}>
+                                <p class="showError">A required item has not
+                                    been
+                                    entered</p>
+                            </template>
+                        </div>
+
+                    </td>
+                    <td
+                        class="backgrounds-color-item border-box">
+                        End Date
+                    </td>
+                    <td class="slds-text-align_right border-box">
+                        <div>
+                            <lightning-input variant="label-hidden"
+                                type="date"
+                                data-id="end_date__c">
+                            </lightning-input>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="slds-col">
+                    <td class="backgrounds-color-item border-box">
+                        Description
+                    </td>
+                    <td colspan="3">
+                        <lightning-input variant="label-hidden" type="text"
+                            data-id="description__c" min-length=1 max-length=255>
+                        </lightning-input>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="slds-text-align_center">
+        <div>
+            <button
+                class="slds-button slds-button_brand slds-m-horizontal_small"
+                onclick={handleReset}>Reset</button>
+            <lightning-button label="Create" class="slds-m-horizontal_small"
+                onclick={handleSubmit}>
+            </lightning-button>
+        </div>
+    </div>
+</template>
