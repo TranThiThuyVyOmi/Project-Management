@@ -1,0 +1,15 @@
+.backgrounds-color-item{
+    background-color: #b2dfee;
+}
+.border-box, .slds-table_bordered, .slds-border_right{
+    border: 1px solid;
+    border-collapse: collapse;
+}
+.border-bottom{
+    border-bottom: 1px solid;
+    border-collapse: collapse;
+}
+.showError{
+    font-size: 11px;
+    color: red;
+}

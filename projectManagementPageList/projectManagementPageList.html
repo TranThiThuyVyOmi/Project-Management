@@ -1,0 +1,72 @@
+<template>
+    <h1 class="slds-text-heading_medium slds-m-bottom_xx-small">Project
+        Management</h1>
+    <c-project-management-page-create onsuccess={refreshData}></c-project-management-page-create>
+    <c-project-management-page-edit record-id={selectedRecordId}
+        onclose={handleClose} onupdated={refreshData}></c-project-management-page-edit>
+    <div class="slds-var-m-horizontal_xx-large slds-m-bottom_small">
+        <h6>Project List</h6>
+        <table
+            class="slds-table slds-table_bordered">
+            <thead class="slds-table_col-bordered">
+                <tr>
+                    <td
+                        class="backgrounds-color-item border-box slds-text-align_center">
+                        <div title="No">No</div>
+                    </td>
+                    <td
+                        class="backgrounds-color-item border-box slds-text-align_center">
+                        <div title="Name">Name</div>
+                    </td>
+                    <td
+                        class="backgrounds-color-item border-box slds-text-align_center">
+                        <div title="StartDate">Start
+                            Date</div>
+                    </td>
+                    <td
+                        class="backgrounds-color-item border-box slds-text-align_center">
+                        <div title="EndDate">End Date</div>
+                    </td>
+                    <td
+                        class="backgrounds-color-item border-box slds-text-align_center">
+                        <div title="Description">Description</div>
+                    </td>
+                    <td
+                        class="backgrounds-color-item border-box slds-text-align_center">
+                        <div title="Action">Action</div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={dataColumns} for:item="data"
+                    for:index="index">
+                    <tr key={data.Id}>
+                        <td class="slds-text-align_center border-bottom">
+                            <div>{index}</div>
+                        </td>
+                        <td class="border-bottom">
+                            <div>{data.Name}</div>
+                        </td>
+                        <td class="slds-text-align_right border-bottom">
+                            <div>{data.start_date__c}</div>
+                        </td>
+                        <td class="slds-text-align_right border-bottom">
+                            <div>{data.end_date__c}</div>
+                        </td>
+                        <td class="border-bottom">
+                            <div>{data.description__c}</div>
+                        </td>
+                        <td class="slds-text-align_center border-bottom">
+                            <div>
+                                <button
+                                    class="slds-button slds-button_brand"
+                                    onclick={handleRecordClick}
+                                    data-record-id={data.Id}>Edit</button>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</template>

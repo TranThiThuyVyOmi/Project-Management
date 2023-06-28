@@ -1,0 +1,82 @@
+/* <template>
+    <template if:false={loading}>
+        <ul>
+            <template for:each={records} for:item="record">
+                <li key={record.Id}>
+                    <a href="#" onclick={handleRecordClick} data-record-id={record.Id}>
+                        {record.Name}
+                    </a>
+                </li>
+            </template>
+        </ul>
+    </template>
+    <template if:true={loading}>
+        Đang tải dữ liệu...
+    </template>
+    <c-child-record record-id={selectedRecordId} onclose={handleClose}></c-child-record>
+</template>
+import { LightningElement, wire } from 'lwc';
+import getRecords from '@salesforce/apex/Controller.getRecords';
+
+export default class ParentRecordList extends LightningElement {
+    records;
+    selectedRecordId;
+    loading = true;
+
+    @wire(getRecords)
+    wiredRecords({ data, error }) {
+        if (data) {
+            this.records = data;
+            this.loading = false;
+        } else if (error) {
+            console.error(error);
+            this.loading = false;
+        }
+    }
+
+    handleRecordClick(event) {
+        event.preventDefault();
+        this.selectedRecordId = event.target.dataset.recordId;
+    }
+
+    handleClose() {
+        this.selectedRecordId = null;
+    }
+}
+<template>
+    <template if:false={loading}>
+        <div>
+            <h1>{record.Name}</h1>
+            <div>Email: {record.Email}</div>
+            <div>Phone: {record.Phone}</div>
+            <button onclick={handleClose}>Đóng</button>
+        </div>
+    </template>
+    <template if:true={loading}>
+        Đang tải dữ liệu...
+    </template>
+</template>
+import { LightningElement, api, wire } from 'lwc';
+import getRecord from '@salesforce/apex/Controller.getRecord';
+
+export default class ChildRecord extends LightningElement {
+    @api recordId;
+    record;
+    loading = true;
+
+    @wire(getRecord, { recordId: '$recordId' })
+    wiredRecord({ data, error }) {
+        if (data) {
+            this.record = data;
+            this.loading = false;
+        } else if (error) {
+            console.error(error);
+            this.loading = false;
+        }
+    }
+
+    handleClose() {
+        const closeEvent = new CustomEvent('close');
+        this.dispatchEvent(closeEvent);
+    }
+} */
